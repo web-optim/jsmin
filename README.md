@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="./images/jsmin_logo.jpg" alt="jsmin logo" align="center" />
+  <img src="./images/jsmin_logo.png" alt="jsmin logo" align="center" />
 </h1>
 <p align="center">
   <b align="center"><a href="README.md">Readme</a></b> |

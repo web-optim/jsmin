@@ -1,6 +1,7 @@
 <h1 align="center">
   <img src="./images/jsmin_logo.png" alt="jsmin logo" align="center" />
   <br />
+  <br />
   <b align="center">Jsmin</b>
 </h1>
 <p align="center">

@@ -1,60 +1,108 @@
-# minify-js
+<h1 align="center">
+  <img src="./images/jsmin_logo.jpg" alt="jsmin logo" align="center" />
+</h1>
+<p align="center">
+  <b align="center"><a href="README.md">Readme</a></b> |
+  <b><a href="https://github.com/web-optim/jsmin">GitHub</a></b> | <br /><br />
+  <a href="#">
+    <img
+      alt="GitHub code size in bytes"
+      src="https://img.shields.io/github/languages/code-size/web-optim/jsmin?style=flat-square"
+    />
+  </a>
+  <a href=""
+    ><img
+      alt="Maintenance"
+      src="https://img.shields.io/maintenance/yes/2026?style=flat-square"
+    />
+  </a>
+  <a href="https://www.codefactor.io/repository/github/web-optim/jsmin">
+    <img
+      alt="CodeFactor"
+      src="https://www.codefactor.io/repository/github/web-optim/jsmin/badge"
+    />
+  </a>
+  <a href="https://gitpod.io/#https://github.com/web-optim/jsmin">
+    <img
+      alt="Gitpod"
+      src="https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod"
+    />
+  </a>
+  <br />
+  <br />
+  <i>
+    An extremely fast JavaScript minifier (pronounced as jasmine or jazz-min
+    /jăz′mĭn/.) written in Rust.
+  </i>
+</p>
 
-Extremely fast JavaScript minifier, written in Rust.
+<details>
+  <summary><b>Table of Contents</b></summary>
+  <p>
 
-## Goals
+- **Getting Started**
+  - [🚀 Features](#features-)
+  - [🛠️ Usage](#usage-)
+- **Overview**
+  - [🎨 Goals](#goals-)
+  - [📊 Performance](#performance-)
+  - [🧪 In Progress](#in-progress-)
+- **Community**
+  - [📣 More Contributors Wanted](#more-contributors-wanted-)
+  - [💖 Supporting Jsmin](#supporting-jsmin-)
+  - [🛣️ Roadmap](#roadmap-%EF%B8%8F)
+  - [🙋 Contributing](#contributing-)
+  - [📜 License](#license-)
+  - [🤝 Credits](#credits-)
+
+  </p>
+</details>
+
+# Goals 🧢
 
 - Fully written in Rust for maximum compatibility with Rust programs and derivatives (FFI, WASM, embedded, etc.).
 - Maximises performance on a single CPU core for simple efficient scaling and easy compatible integration.
 - Minification of individual inputs/files only; no bundling or transforming.
 - Prefer minimal complexity and faster performance over maximum configurability and minimal extra compression.
 
-## Performance
+**[⬆️ Back to Top](#--)**
+
+# Performance 📊
 
 Comparison with esbuild, run on [common libraries](./bench).
 
-<img width="400" alt="Chart showing speed of JS minifiers" src="https://static.wilsonl.in/minify-js/bench/0.6.0/total-times.svg"><img width="400" alt="Chart showing compression of JS minifiers" src="https://static.wilsonl.in/minify-js/bench/0.6.0/average-sizes.svg">
+> Work in progress! 🙂.
 
-## Features
+**[⬆️ Back to Top](#--)**
 
-- Fast parsing powered by SIMD instructions and lookup tables.
-- Data is backed by a fast reusable bump allocation arena.
-- Supports JSX.
-- Analyses scopes and variable visibilities.
-- Minifies identifiers.
-- Omits semicolons, spaces, parentheses, and braces where possible.
-- Transforms functions to arrow functions when `new`, `this`, `arguments`, and `prototype` aren't used.
-- Transforms `if` statements to expressions.
+# Features 🚀
 
-## Usage
+- 🚀 Fast parsing powered by SIMD instructions and lookup tables.
+- 🚂 Data is backed by a fast reusable bump allocation arena.
+-  Supports JSX.
+- 🎚️ Analyses scopes and variable visibilities.
+- 🔍 Minifies identifiers.
+- ⏭️ Omits semicolons, spaces, parentheses, and braces where possible.
+- ⚗️ Transforms functions to arrow functions when `new`, `this`, `arguments`, and `prototype` aren't used.
+- 🧮 Transforms `if` statements to expressions.
 
-### CLI
+**[⬆️ Back to Top](#--)**
 
-Precompiled binaries are available for Linux, macOS, and Windows.
+# Usage 🛠️
 
-[Linux x64](https://static.wilsonl.in/minify-js/cli/0.6.0/linux-x86_64/minify-js) |
-[macOS x64](https://static.wilsonl.in/minify-js/cli/0.6.0/macos-x86_64/minify-js) |
-[Windows x64](https://static.wilsonl.in/minify-js/cli/0.6.0/windows-x86_64/minify-js.exe)
-
-Use the `--help` argument for more details.
-
-```bash
-minify-js --output /path/to/output.min.js /path/to/src.js
-```
-
-### Rust
+## Rust
 
 Add the dependency:
 
 ```toml
 [dependencies]
-minify-js = "0.6.0"
+jsmin = "0.6"
 ```
 
 Call the method:
 
 ```rust
-use minify_js::{Session, TopLevelMode, minify};
+use jsmin::{Session, TopLevelMode, minify};
 
 let mut code: &[u8] = b"const main = () => { let my_first_variable = 1; };";
 let session = Session::new();
@@ -63,24 +111,25 @@ minify(&session, TopLevelMode::Global, code, &mut out).unwrap();
 assert_eq!(out.as_slice(), b"const main=()=>{let a=1}");
 ```
 
-### Node.js
+## Node.js
 
 Install the dependency:
 
 ```bash
-npm i @minify-js/node
+npm i @jsmin/node
 ```
 
 Call the method:
 
 ```typescript
-import {minify} from "@minify-js/node";
+import {minify} from "@jsmin/node";
 
 const src = Buffer.from("let x = 1;", "utf-8");
 const min = minify(src);
 ```
+**[⬆️ Back to Top](#--)**
 
-## In progress
+# In Progress 🧪
 
 - Combine and reorder declarations.
 - Evaluation and folding of constant expressions.
@@ -104,3 +153,85 @@ const min = minify(src);
   - Unwrapping blocks.
   - Unwrapping paretheses, altering expressions as necessary.
   - `if (...) return a; else if (...) return b; else return c` => `return (...) ? a : (...) ? b : c`.
+
+**[⬆️ Back to Top](#--)**
+
+# More Contributors Wanted 📣
+
+We are looking for more willing contributors to help grow this project. For more information on how you can contribute, check out the [project board](https://github.com/neon-mmd/web-optim/jsmin?query=is%3Aopen) and the [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines and rules for making contributions.
+
+**[⬆️ Back to Top](#--)**
+
+# Supporting Jsmin 💖
+
+> For full details and other ways you can help out, see: [**Contributing**](CONTRIBUTING.md)
+
+If you use Jsmin and would like to contribute to its development, we're glad to have you on board! Contributions of any size or type are always welcome, and we will always acknowledge your efforts.
+
+Several areas that we need a bit of help with at the moment are:
+
+- **Completing the In-Progress listings:** Help by completing some of the things from the [in-progress](#in-progress-) listing. 
+- Submit a PR to add a new feature, fix a bug, update the docs, add a theme, widget, or anything else.
+- Star Jsmin on GitHub.
+
+**[⬆️ Back to Top](#--)**
+
+# Roadmap 🛣️
+
+> Coming soon! 🙂.
+
+**[⬆️ Back to Top](#--)**
+
+# Contributing 🙋
+
+Contributions are welcome from anyone. It doesn't matter who you are; you can still contribute to the project in your own way.
+
+## Not a developer but still want to contribute?
+
+Check out this [video](https://youtu.be/FccdqCucVSI) by Mr. Nick on how to contribute.
+
+## Developer
+
+If you are a developer, have a look at the [CONTRIBUTING.md](CONTRIBUTING.md) document for more information.
+
+**[⬆️ Back to Top](#--)**
+
+# License 📜
+
+Jsmin is licensed under the [APACHEv2](LICENSE) license.
+
+**[⬆️ Back to Top](#--)**
+
+# Credits 🤝
+
+We would like to thank the following people for their contributions and support:
+
+**Contributors**
+
+<p>
+  <br />
+  <a href="https://github.com/web-optim/jsmin/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=web-optim/jsmin" />
+  </a>
+  <br />
+</p>
+
+**Stargazers**
+
+<p>
+  <a href="https://github.com/web-optim/jsmin/stargazers">
+    <img src="http://reporoster.com/stars/dark/web-optim/jsmin"/>
+  </a>
+</p>
+
+**[⬆️ Back to Top](#--)**
+
+---
+
+<p align="center">
+  <a href="https://github.com/web-optim/jsmin">
+    <img src="https://github.githubassets.com/images/icons/emoji/octocat.png" />
+  </a>
+  <br /><br />
+  <i>Thank you for Visiting</i>
+</p>
